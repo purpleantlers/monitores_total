@@ -1,0 +1,164 @@
+:root {
+  --mainPurple: #b303ce;
+  --lightPurple: #e463f8;
+  --mainGreen: #02cf24;
+  --lightGreen: #63f77c;
+  --mainRed: #cf0246;
+  --lightRed: #f76394;
+  --mainBlue: #0268cf;
+  --lightBlue: #63adf7;
+  --white: #fff;
+  --gray: #ccc;
+  --black: #000
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  height: 50px;
+  box-shadow: 0 0 10px 2px black;
+}
+
+nav input {
+  width: 250px;
+  height: 30px;
+  margin-left: 10px;
+  padding: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add-btn {
+  background-color: var(--mainPurple);
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  color: var(--white);
+  padding: 10px 20px;
+  font-weight: bolder;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.add-btn:hover {
+  background-color: var(--lightPurple);
+}
+
+.products {
+  padding-inline: 50px;
+  width: 100%;
+  font-weight: 500;
+  margin: 50px 0px;
+}
+
+.products th {
+  text-align: center;
+  background-color: var(--mainPurple);
+  color: var(--white);
+}
+
+.products img {
+  width: 100px;
+}
+
+.products td, .products th {
+  border: 1px solid var(--gray);
+  text-align: center;
+  padding: 10px;
+}
+
+.update-btn {
+  background-color: var(--mainBlue);
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  color: var(--white);
+  padding: 5px 10px;
+  font-weight: bolder;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.update-btn:hover {
+  background-color: var(--lightBlue);
+}
+
+.delete-btn {
+  background-color: var(--mainRed);
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  color: var(--white);
+  padding: 5px 10px;
+  font-weight: bolder;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.delete-btn:hover {
+  background-color: var(--lightRed);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--black);
+  opacity: .6;
+  backdrop-filter: blur(2px);
+  z-index: 1;
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--white);
+  border-radius: 20px;
+  width: 600px;
+  height: fit-content;
+  padding: 10px;
+  z-index: 2;
+  display: none;
+}
+
+.modal label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.modal input {
+  height: 30px;
+  width: 200px;
+  padding: 10px;
+  border: 1px solid var(--black);
+}
+
+.modal input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.modal div {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}

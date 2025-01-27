@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Enlace a los estilos CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Enlace a los scripts de JavaSript -->
+  <script src="script.js" defer></script>
+
+  <title>Monitoroes Total</title>
+</head>
+<body>
+
+  <!-- Buscar y añadir producto -->
+  <nav>
+    <label>
+      Buscar producto:
+      <input type="text" id="userInput">
+    </label>
+
+    <button class="add-btn" onclick="addModal()">Añadir Producto</button>
+  </nav>
+  
+<!-- Tabla donde se renderizan los productos -->
+<table class="products">
+  <thead>
+    <tr>
+      <th>Imagen</th>
+      <th>Nombre</th>
+      <th>Pulgadas</th>
+      <th>Marca</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Acción</th>
+    </tr>
+  </thead>
+
+  <tbody id="productsTable"></tbody>
+</table>
+
+  <!-- Modales para formularios y confirmaciones -->
+  <div class="overlay" id="overlay"></div>
+  <div class="modal" id="modal"></div>
+
+</body>
+</html>
