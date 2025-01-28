@@ -8,7 +8,7 @@
  * - `brand`: La marca del producto.
  * - `price`: El precio del producto.
  * - `quantity`: La cantidad del producto en stock.
- * 
+ *
  */
 let products = [
   {
@@ -130,9 +130,10 @@ const modal = document.getElementById('modal')
 /**
  * Renderizar la tabla completa.
  *
- * This function fetches an array of products and dynamically generates a table
- * to display their information, including image, name, inches, brand, price,
- * quantity, and action buttons for editing and deleting.
+ * 
+ * Esta función obtiene los productos del array y genera dinámicamente una tabla
+ * para mostrar su información, incluyendo imagen, nombre, pulgadas, marca, precio,
+ * cantidad y botones de acción para editar y eliminar.
  *
  * @returns {void}
  */
@@ -142,26 +143,24 @@ const getTable = () => {
     productsTable.innerHTML = ''
 
     // Iteración para renderizar cada producto en la tabla
-    products.forEach((product, index) => {
-      productsTable.innerHTML += `
-    <tr>
-      <td>
-        <image src="assets/${product.image}.jpg" alt="Imagen del producto ${product.name}">
-      </td>
-      <td>${product.name}</td>
-      <td>${product.inches}</td>
-      <td>${product.brand}</td>
-      <td>${product.price} €</td>
-      <td>${product.quantity}</td>
-      <td class='action'>
-        <button class="update-btn" onclick="updateModal(${index})">Editar</button>
-        <button class="delete-btn" onclick="deleteModal(${index})">Eliminar</button>
-      </td>
-    </tr>
-  `
+    const tableRows = products.map((product, index) => {
+      return `<tr>
+        <td><img src="assets/${product.image}.jpg" alt="Imagen del producto ${product.name}"></td>
+        <td>${product.name}</td>
+        <td>${product.inches}</td>
+        <td>${product.brand}</td>
+        <td>${product.price} €</td>
+        <td>${product.quantity}</td>
+        <td class='action'>
+          <button class="update-btn" onclick="updateModal(${index})">Editar</button>
+          <button class="delete-btn" onclick="deleteModal(${index})">Eliminar</button>
+        </td>
+      </tr>`
     })
+
+    productsTable.innerHTML += tableRows.join('')
   } catch (error) {
-    console.error('Ocurrió un error: ', error)
+    console.error('Ocurrió un error:', error)
   }
 }
 
@@ -172,7 +171,7 @@ getTable()
 /**
  * Muestra la modal con contenido diferente dependiendo del valor de `modalValue`.
  *
- * @param {string} modalValue - El tipo de modal que se mostrará. 
+ * @param {string} modalValue - El tipo de modal que se mostrará.
  *                              Posibles valores:
  *                                - 'add': Formulario para agregar un producto.
  *                                - 'update': Formulario para editar un producto existente.
@@ -284,9 +283,9 @@ const modalOn = (modalValue, index) => {
 }
 
 /**
- * 
+ *
  * Ocutla la modal y el overlay
- * 
+ *
  */
 const modalOff = () => {
   try {
@@ -301,9 +300,9 @@ const modalOff = () => {
 // Tipo de Modales
 
 /**
- * 
+ *
  * Muestra la modal para agregar un nuevo producto.
- * 
+ *
  */
 const addModal = () => {
   try {
@@ -315,9 +314,9 @@ const addModal = () => {
 }
 
 /**
- * 
+ *
  * Muestra la modal para editar un producto existente.
- * 
+ *
  */
 const updateModal = (index) => {
   try {
@@ -329,9 +328,9 @@ const updateModal = (index) => {
 }
 
 /**
- * 
+ *
  * Muestra la modal para eliminar un producto existente.
- * 
+ *
  */
 const deleteModal = (index) => {
   try {
@@ -345,45 +344,53 @@ const deleteModal = (index) => {
 // ACCIONES
 
 /**
- * 
- * Agrega un EventListener a un elemento input que filtra las filas de una tabla 
+ *
+ * Agrega un EventListener a un elemento input que filtra las filas de una tabla
  * en función del valor ingresado por el usuario.
- * 
+ *
  * @param {HTMLElement} userInput - El elemento input donde se escucharán los eventos de tecla pulsada.
  * @param {HTMLElement} productsTable - El elemento tabla que se filtrará.
+ * 
  */
 userInput.addEventListener('keyup', (event) => {
   try {
-    const value = event.target.value.toLowerCase()
-    const row = productsTable.getElementsByTagName('tr')
+    const value = event.target.value.toLowerCase();
+    const rows = [...productsTable.getElementsByTagName('tr')];
 
-    for (i = 0; i < row.length; i++) {
-      column = row[i].getElementsByTagName('td')[1]
-      if (column) {
-        txtValue = column.textContent || column.innerText
-        if (txtValue.toLowerCase().indexOf(value) > -1) {
-          row[i].style.display = ''
-        } else {
-          row[i].style.display = 'none'
-        }
+    const filteredRows = rows.reduce((newArr, row) => {
+      const column = row.getElementsByTagName('td')[1];
+      const txtValue = column.textContent || column.innerText;
+
+      if (txtValue.toLowerCase().indexOf(value) > -1) {
+        newArr.push(row);
       }
-    }
+      return newArr;
+    }, []);
+
+    // Actualizar tabla
+    rows.forEach(row => {
+      row.style.display = 'none'; // Ocultamos todas las filas inicialmente
+    });
+    filteredRows.forEach(row => {
+      row.style.display = ''; // Mostramos solo las filas filtradas
+    });
+
   } catch (error) {
-    console.error('Ocurrió un error: ', error)
+    console.error('Ocurrió un error:', error);
   }
-})
+});
 
 /**
- * 
+ *
  * Agrega un nuevo producto a la lista de productos.
- * 
+ *
  * @param {string} image - El nombre de la imagen del producto.
  * @param {string} name - El nombre del producto.
  * @param {number} inches - El tamaño del producto en pulgadas.
  * @param {string} brand - La marca del producto.
  * @param {number} price - El precio del producto.
  * @param {number} quantity - La cantidad del producto en stock.
- * 
+ *
  */
 const addProduct = (image, name, inches, brand, price, quantity) => {
   try {
@@ -414,9 +421,9 @@ const addProduct = (image, name, inches, brand, price, quantity) => {
 }
 
 /**
- * 
+ *
  * Edita un producto existente en la lista de productos.
- * 
+ *
  * @param {number} index - El índice del producto a actualizar.
  * @param {string} image - El nuevo nombre de la imagen del producto.
  * @param {string} name - El nuevo nombre del producto.
@@ -424,7 +431,7 @@ const addProduct = (image, name, inches, brand, price, quantity) => {
  * @param {string} brand - La nueva marca del producto.
  * @param {number} price - El nuevo precio del producto.
  * @param {number} quantity - La nueva cantidad del producto en stock.
- * 
+ *
  */
 const updateProduct = (index, image, name, inches, brand, price, quantity) => {
   try {
@@ -454,11 +461,11 @@ const updateProduct = (index, image, name, inches, brand, price, quantity) => {
 }
 
 /**
- * 
+ *
  * Elimina un producto de la lista de productos.
- * 
+ *
  * @param {number} index - El índice del producto a eliminar.
- * 
+ *
  */
 const deleteProduct = (index) => {
   try {
